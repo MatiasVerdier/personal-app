@@ -1,0 +1,6 @@
+@import "https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css";
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
