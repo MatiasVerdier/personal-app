@@ -30,6 +30,7 @@ class App extends Component {
     
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
+    this.onLogout = this.onLogout.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
   }
@@ -46,6 +47,10 @@ class App extends Component {
       .catch(error => console.log(error));
   }
   
+  onLogout() {
+    auth.signOut().catch(error => console.log(error));
+  }
+  
   onEmailChange(e) {
     this.setState({
       email: e.target.value
@@ -57,7 +62,7 @@ class App extends Component {
     })
   }
   
-  componentDidMount() {    
+  componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -81,7 +86,7 @@ class App extends Component {
         <div>
           <h1>{this.state.user.displayName}</h1>
           
-          <button onClick={this.logout}>Logout</button>
+          <button onClick={this.onLogout}>Logout</button>
         </div>
       )
     } else {

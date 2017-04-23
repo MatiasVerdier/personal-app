@@ -24,8 +24,10 @@ const LoginForm = (props) => {
         <Input type="password" placeholder="Tu contraseña" onChange={props.onPasswordChange}></Input>
       </FormField>
       
-      <Button onClick={props.onSignIn}>Sign In</Button>
-      <Button primary onClick={props.onSignUp}>Sign Up</Button>
+      <FormField>
+        <Button onClick={props.onSignIn}>Sign In</Button>
+        <Button primary onClick={props.onSignUp}>Sign Up</Button>
+      </FormField>
     </Form>
   );
 };
