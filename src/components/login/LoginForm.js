@@ -11,20 +11,23 @@ const Form = styled.form`
 `;
 
 const LoginForm = (props) => {
-    return (
-      <Form>
-        <FormField>
-          <Input type="email" placeholder="Tu direccion de correo"></Input>
-        </FormField>
-        
-        <FormField>
-          <Input type="password" placeholder="Tu contraseña"></Input>
-        </FormField>
-        
-        <Button>Sign In</Button>
-        <Button primary>Sign Up</Button>
-      </Form>
-    );
+  const preventSubmit = (e) => {
+    e.preventDefault();
+  }
+  return (
+    <Form onSubmit={preventSubmit}>
+      <FormField>
+        <Input type="email" placeholder="Tu direccion de correo" onChange={props.onEmailChange}></Input>
+      </FormField>
+      
+      <FormField>
+        <Input type="password" placeholder="Tu contraseña" onChange={props.onPasswordChange}></Input>
+      </FormField>
+      
+      <Button onClick={props.onSignIn}>Sign In</Button>
+      <Button primary onClick={props.onSignUp}>Sign Up</Button>
+    </Form>
+  );
 };
 
 export default LoginForm;

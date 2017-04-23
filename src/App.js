@@ -19,12 +19,42 @@ firebase.initializeApp(config);
 const auth = firebase.auth();
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       user: null,
-      isAuthenticated: false
+      isAuthenticated: false,
+      email: '',
+      password: ''
     };
+    
+    this.onSignIn = this.onSignIn.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+  }
+  
+  onSignIn() {
+    const { email, password } = this.state;
+    auth.signInWithEmailAndPassword(email, password)
+      .catch(error => console.log(error));
+  }
+  
+  onSignUp() {
+    const { email, password } = this.state;
+    auth.createUserWithEmailAndPassword(email, password)
+      .catch(error => console.log(error));
+  }
+  
+  onEmailChange(e) {
+    this.setState({
+      email: e.target.value
+    })
+  }
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    })
   }
   
   componentDidMount() {    
@@ -55,7 +85,13 @@ class App extends Component {
         </div>
       )
     } else {
-      content = <LoginForm></LoginForm>
+      content = <LoginForm
+                  onSignIn={this.onSignIn}
+                  onSignUp={this.onSignUp}
+                  onEmailChange={this.onEmailChange}
+                  onPasswordChange={this.onPasswordChange}
+                  >
+                </LoginForm>
     }
     
     return (
